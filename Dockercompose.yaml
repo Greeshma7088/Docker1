@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  pythonapp:
+    build:
+      context: .
+    working_dir: /pythondscript
+    volumes:
+      - .:/pythondscript
+    ports:
+      - "5000:5000"
+    command: python pythonscript.py
+    container_name: python_script_container
