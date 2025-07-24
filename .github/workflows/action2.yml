@@ -1,4 +1,4 @@
-name: Build Docker2 Image
+name: Build and Test Docker2 Image
 
 on:
   push:
@@ -16,8 +16,20 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build Docker2 image
+      - name: Build Docker image
         run: docker build -t docker2-image:latest .
+
+      - name: Run Docker container in background
+        run: docker run -d --name docker2-container -p 3000:3000 docker2-image:latest
+
+      - name: Wait for server to be ready
+        run: sleep 5
+
+      - name: Test response from app
+        run: curl http://localhost:3000
+
+      - name: Stop container
+        run: docker stop docker2-container
 
       - name: Run Docker2 container and output logs
         run: docker run --rm docker2-image:latest
