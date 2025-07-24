@@ -19,3 +19,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t your-image-name:latest .
 
+      - name: Run container and output logs
+        run: docker run --rm your-image-name:latest
+
+
