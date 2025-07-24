@@ -28,8 +28,8 @@ jobs:
       - name: Test response from app
         run: curl http://localhost:3000
 
+      - name: Show container logs
+        run: docker logs docker2-container
+
       - name: Stop container
         run: docker stop docker2-container
-
-      - name: Run Docker2 container and output logs
-        run: docker run --rm docker2-image:latest
