@@ -19,9 +19,6 @@ jobs:
       - name: Build Docker image
         run: docker build -t docker2-image:latest .
 
-      - name: Run Docker container in background
-        run: docker run -d --name docker2-container -p 3000:3000 -e USER_NAME=${{ secrets.USER_NAME }} -e PASSWORD=${{ secrets.PASSWORD }} docker2-image:latest
-
 
       - name: Wait for server to be ready
         run: sleep 5
@@ -34,4 +31,6 @@ jobs:
 
       - name: Stop container
         run: docker stop docker2-container
-
+        
+      - name: Login to DockerHub 
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
