@@ -33,4 +33,7 @@ jobs:
 
       - name: Stop container
         run: docker stop docker2-container
+        
+      - name: Login to DockerHub (optional)
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
