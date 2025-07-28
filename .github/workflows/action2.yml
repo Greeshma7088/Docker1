@@ -19,6 +19,8 @@ jobs:
       - name: Build Docker image
         run: docker build -t docker2-image:latest .
 
+      - name: Run Docker container in background
+        run: docker run -d --name docker2-container -p 3000:3000 docker2-image:latest
 
       - name: Wait for server to be ready
         run: sleep 5
@@ -31,5 +33,4 @@ jobs:
 
       - name: Stop container
         run: docker stop docker2-container
-        
-    
+
